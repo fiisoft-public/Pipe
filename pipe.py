@@ -39,7 +39,7 @@ class Pipe:
     Described as :
     first = Pipe(lambda iterable: next(iter(iterable)))
     and used as :
-    print [1, 2, 3] | first
+    print [1, 2, 3] >> first
     printing 1
 
     Or represent a Pipeable Function :
@@ -47,14 +47,19 @@ class Pipe:
     Described as :
     select = Pipe(lambda iterable, pred: (pred(x) for x in iterable))
     and used as :
-    print [1, 2, 3] | select(lambda x: x * 2)
+    print [1, 2, 3] >> select(lambda x: x * 2)
     # 2, 4, 6
     """
     def __init__(self, function):
         self.function = function
         functools.update_wrapper(self, function)
 
-    def __ror__(self, other):
+    def __or__(self, other):
+        if isinstance(other, Pipe):
+            return Pipe(lambda x: self.function(other.function(x)))
+        raise ValueError('Cannot combine Pipe object with non-Pipe object')
+
+    def __rrshift__(self, other):
         return self.function(other)
 
     def __call__(self, *args, **kwargs):
@@ -179,7 +184,7 @@ def permutations(iterable, r=None):
 def netcat(to_send, host, port):
     with closing(socket.socket(socket.AF_INET, socket.SOCK_STREAM)) as s:
         s.connect((host, port))
-        for data in to_send | traverse:
+        for data in to_send >> traverse:
             s.send(data)
         while 1:
             data = s.recv(4096)
@@ -192,7 +197,7 @@ def netcat(to_send, host, port):
 def netwrite(to_send, host, port):
     with closing(socket.socket(socket.AF_INET, socket.SOCK_STREAM)) as s:
         s.connect((host, port))
-        for data in to_send | traverse:
+        for data in to_send >> traverse:
             s.send(data)
 
 
@@ -203,7 +208,7 @@ def traverse(args):
             if isinstance(arg, str):
                 yield arg
             else:
-                for i in arg | traverse:
+                for i in arg >> traverse:
                     yield i
         except TypeError:
             # not iterable --- output leaf
