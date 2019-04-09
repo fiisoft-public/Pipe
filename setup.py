@@ -8,7 +8,7 @@ with open('README.md') as readme_file:
 setup(
     name='pipe',
     py_modules=['pipe'],
-    version='1.5.0.rrshift',
+    version='1.5.1.rrshift',
     description='Module enablig a sh like infix syntax (using pipes)',
     author='Julien Palard',
     author_email='julien@palard.fr',
