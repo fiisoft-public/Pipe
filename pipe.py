@@ -55,9 +55,9 @@ class Pipe:
         functools.update_wrapper(self, function)
 
     def __or__(self, other):
-        if isinstance(other, Pipe):
-            return Pipe(lambda x: self.function(other.function(x)))
-        raise ValueError('Cannot combine Pipe object with non-Pipe object')
+        if not isinstance(other, Pipe):
+            raise ValueError('Cannot combine Pipe object with non-Pipe object')
+        return Pipe(lambda x: self.function(other.function(x)))
 
     def __rrshift__(self, other):
         return self.function(other)
