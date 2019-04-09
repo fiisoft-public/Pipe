@@ -57,7 +57,7 @@ class Pipe:
     def __or__(self, other):
         if not isinstance(other, Pipe):
             raise ValueError('Cannot combine Pipe object with non-Pipe object')
-        return Pipe(lambda x: self.function(other.function(x)))
+        return Pipe(lambda x: other.function(self.function(x)))
 
     def __rrshift__(self, other):
         return self.function(other)
