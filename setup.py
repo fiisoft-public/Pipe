@@ -6,14 +6,14 @@ with open('README.md') as readme_file:
     readme = readme_file.read()
 
 setup(
-    name='pipe',
-    py_modules=['pipe'],
-    version='1.5.1+rrshift',
-    description='Module enabling a sh like infix syntax (using pipes)',
+    name='rspipe',
+    py_modules=['rspipe'],
+    version='1.6.0+rrshift',
+    description='Module enabling a sh like infix syntax (using right shift operator as pipes)',
     author='Julien Palard',
     author_email='julien@palard.fr',
-    url='https://github.com/JulienPalard/Pipe',
-    download_url='https://github.com/JulienPalard/Pipe/tarball/master',
+    url='https://github.com/fiisoft-public/rspipe',
+    download_url='https://github.com/fiisoft-public/rspipe/archive/master.zip',
     long_description=readme,
     long_description_content_type='text/markdown; charset=UTF-8',
     license='MIT license',

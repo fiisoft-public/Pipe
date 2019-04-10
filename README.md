@@ -30,7 +30,7 @@ Given fib a generator of fibonacci numbers:
 I don't like `import * `but for the following examples in an REPL it
 will be OK, so:
 
-    >>> from pipe import *
+    >>> from rspipe import *
 
 The basic syntax is to use a Pipe like in a shell:
 

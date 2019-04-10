@@ -1,0 +1,2 @@
+test:
+	@python rspipe.py

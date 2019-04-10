@@ -20,7 +20,7 @@ __author__ = 'Julien Palard <julien@eeple.fr>'
 __credits__ = """Jerome Schneider, for his Python skillz,
 and dalexander for contributing"""
 __date__ = '9 April 2019'
-__version__ = '1.5.1+rrshift'
+__version__ = '1.6.0+rrshift'
 __all__ = [
     'Pipe', 'take', 'tail', 'skip', 'all', 'any', 'average', 'count',
     'max', 'min', 'as_dict', 'as_set', 'permutations', 'netcat', 'netwrite',
